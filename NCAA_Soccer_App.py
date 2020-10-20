@@ -23,7 +23,7 @@ from matplotlib.projections import get_projection_class
 from scipy.spatial import ConvexHull
 import vaex
 
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 try:
