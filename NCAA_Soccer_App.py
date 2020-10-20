@@ -38,13 +38,13 @@ except ModuleNotFoundError:
 
 @st.cache
 def load_defense_data(season, team):
-    df = vaex.open('/Users/michael/Documents/Python/CSV/NCAA 2020 Defense.hdf5')
+    df = vaex.open('./NCAA 2020 Defense.hdf5')
     df = df[(df.Team.isin(team)) & (df.Season.isin(season))]
     return df.to_pandas_df()
 
 @st.cache
 def load_pass_data(season, team, opp):
-    df = vaex.open('/Users/michael/Documents/Python/CSV/NCAA 2020 Passes.hdf5')
+    df = vaex.open('./NCAA 2020 Passes.hdf5')
     if opp == 'yes':
         df = df[((df['HomeTeam'].isin(team)) | (df['AwayTeam'].isin(team))) & (~df['Team'].isin(team)) & (df.Season.isin(season))]
     else:
@@ -53,13 +53,13 @@ def load_pass_data(season, team, opp):
 
 @st.cache
 def load_carry_data(season, team):
-    df = vaex.open('/Users/michael/Documents/Python/CSV/NCAA 2020 Carries.hdf5')
+    df = vaex.open('./NCAA 2020 Carries.hdf5')
     df = df[(df.Team.isin(team)) & (df.Season.isin(season))]
     return df.to_pandas_df()
 
 @st.cache
 def load_shot_data(season, team, opp):
-    df = vaex.open('/Users/michael/Documents/Python/CSV/NCAA 2020 Shots.hdf5')
+    df = vaex.open('./NCAA 2020 Shots.hdf5')
     if opp == 'yes':
         df = df[((df['HomeTeam'].isin(team)) | (df['AwayTeam'].isin(team))) & (~df['Team'].isin(team)) & (df.Season.isin(season))]
     else:
@@ -69,13 +69,13 @@ def load_shot_data(season, team, opp):
 @st.cache
 def load_sm_data():
     #return pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA Season and Team.csv')
-    return pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA 2020 Season and Team.csv')
+    return pd.read_csv('./NCAA 2020 Season and Team.csv')
 
 #df = load_data()
 #df1 = pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA All Matches.csv')
 
-fontPathBold = "/Users/michael/Library/Fonts/EBGaramond-Bold.ttf"
-fontPathNBold = "/Users/michael/Library/Fonts/EBGaramond-Medium.ttf"
+fontPathBold = "./EBGaramond-Bold.ttf"
+fontPathNBold = "./EBGaramond-Medium.ttf"
 headers = fm.FontProperties(fname=fontPathBold, size=46)
 footers = fm.FontProperties(fname=fontPathNBold, size=24)
 Labels = fm.FontProperties(fname=fontPathNBold, size=20)
