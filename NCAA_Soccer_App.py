@@ -94,7 +94,7 @@ TableNum = fm.FontProperties(fname=fontPathNBold, size=30)
 
 
 
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 zo=12
 def draw_pitch(pitch, line, orientation,view):
