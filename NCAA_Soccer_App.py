@@ -688,7 +688,7 @@ def TeamGoalKicks(state):
     
     players = (match_df.Player.unique()).tolist()
     
-    player = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.PlayerMatchName.unique()), default=players)
+    player = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.Player.unique()), default=players)
     player_df = match_df[match_df['Player'].isin(player)]
     
     #st.text(f"Selected Season: {season} / Selected Team: {team} / Player: {player}")
