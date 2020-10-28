@@ -686,15 +686,20 @@ def TeamGoalKicks(state):
     
     match_df = match_df[match_df['ifGoalKick'] == 1]
     
+    players = (match_df.Player.unique()).tolist()
+    
+    player = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.PlayerMatchName.unique()), default=players)
+    player_df = match_df[match_df['Player'].isin(player)]
+    
     #st.text(f"Selected Season: {season} / Selected Team: {team} / Player: {player}")
     
 
     
-    st.header("Defensive Maps")
+    st.header("Goal Kick Maps")
     draw_pitch('white', 'black', 'horizontal', 'full')
     #player_events = player_df[(player_df.Player == player)]
     plt.title(str(season)+' - '+str(team)+' Goal Kick Heat Map', fontproperties=headers, color="black")
-    sns.kdeplot(match_df.DestX, match_df.DestY, cmap="RdYlBu_r",shade=True,n_levels=25, shade_lowest=False, alpha=.75, zorder=zo)
+    sns.kdeplot(player_df.DestX, player_df.DestY, cmap="RdYlBu_r",shade=True,n_levels=25, shade_lowest=False, alpha=.75, zorder=zo)
 
     plt.arrow(0.5, 2.5, 18-2, 1-1, head_width=1.2,
             head_length=1.2,
@@ -708,7 +713,7 @@ def TeamGoalKicks(state):
     
     draw_pitch('white', 'black', 'horizontal', 'full')
     plt.title(str(season)+' - '+str(team)+' Goal Kick Scatter Map', fontproperties=headers, color="black")
-    plt.scatter(match_df.DestX,match_df.DestY, marker='o', facecolors="#B2B2B2", s=120,
+    plt.scatter(player_df.DestX,player_df.DestY, marker='o', facecolors="#B2B2B2", s=120,
             edgecolors="black",zorder=zo)
 
     st.pyplot()
