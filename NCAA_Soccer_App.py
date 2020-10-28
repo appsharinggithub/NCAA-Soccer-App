@@ -534,6 +534,7 @@ def main():
         "Team Defense": TeamDefensive,
         "Team Attacking Corners": AttCorner,
         "Team Defensive Corners": DefCorner,
+        "Team Goal Kicks": TeamGoalKicks,
         "Player Shots": PlayerShot,
         "Goalkeeper Shot Map": GKShotMap,
         "Player Pass": PlayerPass,
@@ -664,6 +665,53 @@ def _get_state(hash_funcs=None):
 
 #df = load_defense_data()
 
+    
+def TeamGoalKicks(state):
+    sm_df = load_sm_data()
+    
+    team = st.sidebar.multiselect('Select Team(s)', natsorted(sm_df.Team.unique()))
+    sm_df = sm_df[sm_df['Team'].isin(team)]
+    
+    
+    season = st.sidebar.multiselect('Select Season(s)',natsorted(sm_df.Season.unique()))  
+    sm_df = sm_df[sm_df['Season'].isin(season)]
+    
+    pass_df = load_pass_data(season, team, 'no')
+    
+
+    matches = (pass_df.MatchName.unique()).tolist()
+    
+    match = st.sidebar.multiselect("Select Match(es)", natsorted(pass_df.MatchName.unique()), default=matches)
+    match_df = pass_df[pass_df['MatchName'].isin(match)]
+    
+    match_df = match_df[match_df['ifGoalKick'] == 1]
+    
+    #st.text(f"Selected Season: {season} / Selected Team: {team} / Player: {player}")
+    
+
+    
+    st.header("Defensive Maps")
+    draw_pitch('white', 'black', 'horizontal', 'full')
+    #player_events = player_df[(player_df.Player == player)]
+    plt.title(str(season)+' - '+str(team)+' Goal Kick Heat Map', fontproperties=headers, color="black")
+    sns.kdeplot(match_df.DestX, match_df.DestY, cmap="RdYlBu_r",shade=True,n_levels=25, shade_lowest=False, alpha=.75, zorder=zo)
+
+    plt.arrow(0.5, 2.5, 18-2, 1-1, head_width=1.2,
+            head_length=1.2,
+            color='black',
+            alpha=1,
+            length_includes_head=True, zorder=12, width=.3)
+    plt.xlim(-.5,105.5)
+    plt.ylim(-.5,68.5)
+    st.pyplot()
+    
+    
+    draw_pitch('white', 'black', 'horizontal', 'full')
+    plt.title(str(season)+' - '+str(team)+' Goal Kick Scatter Map', fontproperties=headers, color="black")
+    plt.scatter(match_df.DestX,match_df.DestY, marker='o', facecolors="#B2B2B2", s=120,
+            edgecolors="black",zorder=zo)
+
+    st.pyplot()
     
 def PlayerDefensive(state):
     sm_df = load_sm_data()
