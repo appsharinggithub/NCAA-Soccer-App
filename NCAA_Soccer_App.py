@@ -46,7 +46,7 @@ def load_defense_data(season, team):
 
 @st.cache
 def load_pass_data(season, team, opp):
-    url = 'https://drive.google.com/file/d/17FNbkRCZCb_Ue77AbzgBv36SxvD4MTg_/view?usp=sharing'
+    url = 'https://drive.google.com/file/d/1WEJZT5tQ5tepwZd-HMev6vQ0yXaJgIYM/view?usp=sharing'
     path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
     df = pd.read_csv(path)
     if opp == 'yes':
