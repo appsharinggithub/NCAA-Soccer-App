@@ -107,9 +107,6 @@ TableHead = fm.FontProperties(fname=fontPathBold, size=34)
 TableNum = fm.FontProperties(fname=fontPathNBold, size=30)
 
 
-
-
-
 zo=12
 def draw_pitch(pitch, line, orientation,view):
     
@@ -740,6 +737,12 @@ def PlayerDefensive(state):
     match = st.sidebar.multiselect("Select Match(es)", natsorted(player_df.MatchName.unique()), default=matches)
     match_df = player_df[player_df['MatchName'].isin(match)]
     
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
+    
     #st.text(f"Selected Season: {season} / Selected Team: {team} / Player: {player}")
     
 
@@ -792,6 +795,12 @@ def TeamDefensive(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(defense_df.MatchName.unique()), default=matches)
     match_df = defense_df[defense_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
     st.header("Team Defensive Maps")  
     st.subheader("Heat Map, GPA Map, & Coverage Map")    
@@ -930,7 +939,12 @@ def PlayerPass(state):
     match = st.sidebar.multiselect("Select Match(es)", natsorted(player_df.MatchName.unique()), default=matches)
     match_df = player_df[player_df['MatchName'].isin(match)]
     
-        
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
+    
     
     st.header("Player Pass Maps")  
     st.subheader("GPA Map, xA Map, & OP Map")    
@@ -1302,6 +1316,12 @@ def PlayerCarry(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(player_df.MatchName.unique()), default=matches)
     match_df = player_df[player_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
     
     st.header("Player Carry Maps")  
@@ -1956,6 +1976,12 @@ def TeamPassSonar(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(pass_df.MatchName.unique()), default=matches)
     match_df = pass_df[pass_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
 
     st.header("Team PassSonar")  
@@ -2452,8 +2478,10 @@ def TeamShot(state):
     match = st.sidebar.multiselect("Select Match(es)", natsorted(ToS_df.MatchName.unique()), default=matches)
     match_df = ToS_df[ToS_df['MatchName'].isin(match)]
     
-
-        
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
 
     st.header("Team Shot Maps")  
     st.subheader("By Matches, By Type of Possession, By Outcome of Shot, By Type of Shot")    
@@ -2899,6 +2927,12 @@ def TeamShotD(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(ToS_df.MatchName.unique()), default=matches)
     match_df = ToS_df[ToS_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
     
     st.header("Team Defensive Shot Maps")  
@@ -3334,6 +3368,12 @@ def PlayerShot(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(ToS_df.MatchName.unique()), default=matches)
     match_df = ToS_df[ToS_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
     
     st.header("Player Shot Maps")  
@@ -3770,6 +3810,12 @@ def GKShotMap(state):
     
     match = st.sidebar.multiselect("Select Match(es)", natsorted(ToS_df.MatchName.unique()), default=matches)
     match_df = ToS_df[ToS_df['MatchName'].isin(match)]
+    
+    matchesid = (match_df.MatchID.unique()).tolist()
+    
+    matchid = st.sidebar.multiselect("Select Match(es)", natsorted(match_df.MatchID.unique()), default=matchesid)
+    match_df = match_df[match_df['MatchID'].isin(matchid)]        
+
 
     st.header("Goalkeeper Shot Maps")  
     #st.subheader("Heat Maps by Zones")    
