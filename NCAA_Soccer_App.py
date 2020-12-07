@@ -79,6 +79,17 @@ def load_shot_data(season, team, opp):
     return df
 
 @st.cache
+def load_gkshot_data(season, team, opp):
+    url = 'https://drive.google.com/file/d/1HPYKEyIhZ_mBTCtV1GhsD2p8TqDOGvz4/view?usp=sharing'
+    path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
+    df = pd.read_csv(path)
+    if opp == 'yes':
+        df = df[((df['HomeTeam'].isin(team)) | (df['AwayTeam'].isin(team))) & (~df['Team'].isin(team)) & (df.Season.isin(season))]
+    else:
+        df = df[(df.Team.isin(team)) & (df.Season.isin(season))]
+    return df
+
+@st.cache
 def load_sm_data():
     #return pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA Season and Team.csv')
     url = 'https://drive.google.com/file/d/1ygw0v6eTNppkSAQ4ZSVm2nouJYEfbYPD/view?usp=sharing'
@@ -3786,7 +3797,7 @@ def GKShotMap(state):
     season = st.sidebar.multiselect('Select Season(s)',natsorted(sm_df.Season.unique()))  
     sm_df = sm_df[sm_df['Season'].isin(season)]
     
-    shot_df = load_shot_data(season, team, 'yes')
+    shot_df = load_gkshot_data(season, team, 'yes')
     
     player = st.sidebar.multiselect('Select Player(s)', natsorted(shot_df.Teammate.unique()))
     player_df = shot_df[(shot_df['Teammate'].isin(player)) & (shot_df['OnT'] == 1)]
