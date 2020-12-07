@@ -96,6 +96,14 @@ def load_sm_data():
     path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
     return pd.read_csv(path)
 
+@st.cache
+def load_gksm_data():
+    #return pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA Season and Team.csv')
+    url = 'https://drive.google.com/file/d/1M4-Zh7NcaI5QtbGOVJGXvwL7qJgsmv-z/view?usp=sharing'
+    path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
+    return pd.read_csv(path)
+
+
 #df = load_data()
 #df1 = pd.read_csv('/Users/michael/Documents/Python/CSV/NCAA All Matches.csv')
 
@@ -3788,7 +3796,7 @@ def PlayerShot(state):
     
     
 def GKShotMap(state):
-    sm_df = load_sm_data()
+    sm_df = load_gksm_data()
     
     team = st.sidebar.multiselect('Select Team(s)', natsorted(sm_df.Team.unique()))
     sm_df = sm_df[(sm_df['Team'].isin(team))]
